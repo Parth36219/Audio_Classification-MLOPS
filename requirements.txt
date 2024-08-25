@@ -1,6 +1,0 @@
-pandas
-tensorflow
-librosa
-sounddevice
-streamlit
-pyaudio
