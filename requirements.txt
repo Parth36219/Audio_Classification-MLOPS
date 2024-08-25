@@ -3,3 +3,4 @@ tensorflow
 librosa
 sounddevice
 streamlit
+pyaudio
