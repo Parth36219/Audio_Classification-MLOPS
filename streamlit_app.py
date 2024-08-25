@@ -2,9 +2,9 @@ import streamlit as st
 import librosa
 import numpy as np
 import pickle
-import pyaudio
-import wave
+import ffmpeg
 from io import BytesIO
+import subprocess
 
 # Load the model
 with open("model.pkl", "rb") as f:
@@ -30,34 +30,17 @@ def process_audio(audio_data, sample_rate):
 
     return y_pred
 
-def record_audio(recording_time, sample_rate):
-    p = pyaudio.PyAudio()
-    stream = p.open(format=pyaudio.paInt16,
-                    channels=1,
-                    rate=sample_rate,
-                    input=True,
-                    frames_per_buffer=1024)
+def record_audio_ffmpeg(duration, sample_rate):
+    # Create a subprocess to record audio with ffmpeg
+    ffmpeg_cmd = (
+        ffmpeg
+        .input('default', format='dshow', ac=1, ar=sample_rate, t=duration)
+        .output('pipe:', format='wav')
+        .run_async(pipe_stdout=True, pipe_stderr=True)
+    )
+    audio_data, _ = ffmpeg_cmd.communicate()
 
-    frames = []
-    for _ in range(int(sample_rate / 1024 * recording_time)):
-        data = stream.read(1024)
-        frames.append(data)
-    
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
-    
-    audio_data = b''.join(frames)
     audio_file = BytesIO(audio_data)
-    
-    # Save as WAV
-    with wave.open(audio_file, 'wb') as wf:
-        wf.setnchannels(1)
-        wf.setsampwidth(pyaudio.PyAudio().get_sample_size(pyaudio.paInt16))
-        wf.setframerate(sample_rate)
-        wf.writeframes(audio_data)
-    
-    audio_file.seek(0)
     return audio_file
 
 tab1, tab2 = st.tabs(["Upload File", "Record Audio"])
@@ -74,7 +57,7 @@ with tab2:
     recording_time = 2  # seconds
     sample_rate = 16000
     if st.button("Record"):
-        audio_file = record_audio(recording_time, sample_rate)
+        audio_file = record_audio_ffmpeg(recording_time, sample_rate)
         audio_data, _ = librosa.load(audio_file, sr=sample_rate)
         
         # Play the recorded audio
