@@ -12,7 +12,7 @@ def audio_emotion_classification_pipeline():
     Steps:
     1. Ingest audio data and preprocess it.
     2. Split the preprocessed data into training and evaluation sets.
-    3. Train a RandomForestClassifier on the training data.
+    3. Train a CNN model
     4. Evaluate the trained model on the evaluation data and print a classification report.
     """
     # Ingest and preprocess the data
