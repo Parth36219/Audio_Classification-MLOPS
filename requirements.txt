@@ -1,6 +1,5 @@
 pandas
-zenml
 tensorflow
 librosa
 sounddevice
-mlflow
+streamlit
