@@ -1,0 +1,18 @@
+# ZenML server package
+zenml[server]
+
+# Core packages
+pandas
+
+# ZenML core package
+zenml
+
+# Machine Learning libraries
+tensorflow
+
+# Audio processing libraries
+librosa
+sounddevice
+
+# Model management
+mlflow

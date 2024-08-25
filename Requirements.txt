@@ -1,7 +1,0 @@
-zenml["server"]
-pandas
-zenml
-tensorflow
-librosa
-sounddevice
-mlflow
