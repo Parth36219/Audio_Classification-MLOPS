@@ -1,6 +1,6 @@
-pandas
-tensorflow
-librosa
-sounddevice
-streamlit
-pyaudio
+pandas==2.0.3
+tensorflow==2.13.0
+librosa==0.10.0
+sounddevice==0.4.6
+streamlit==1.24.0
+pyaudio==0.2.13
