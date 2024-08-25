@@ -5,6 +5,7 @@ import pickle
 import ffmpeg
 from io import BytesIO
 import subprocess
+from tensorflow.keras.models import Sequential
 
 # Load the model
 with open("model.pkl", "rb") as f:
