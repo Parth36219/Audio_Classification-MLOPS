@@ -10,9 +10,10 @@ This project aims to classify audio files into different animal categories using
 ZenML is used for orchestrating the different steps involved in the audio classification pipeline. The steps include:
 
 - **Data Ingestion**: Loading audio files, extracting features (such as Mel spectrograms), and preparing the data for model training.
-- **Data Preprocessing**: Normalizing and shaping the data to fit the model requirements.
+- **Data Splitting**: Splitting Data into Train and Test set.
 - **Model Training**: Training a CNN model to classify audio files into predefined categories.
 - **Model Evaluation**: Evaluating the model's performance using appropriate metrics.
+- **Model Deployment**: To verify if the new trained model meets required criteria and then save the Trained model.
 
 ### MLFlow
 MLFlow is integrated to track and log various aspects of the model training process. This includes:
